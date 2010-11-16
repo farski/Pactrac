@@ -45,8 +45,8 @@ ol:last-child { margin-bottom: 0; }
 			padding: 9px 9px 0 0;
 			margin: 0;
 			font-size: 14px;
-			text-transform: capitalize;
 		}
+		ol li h4:first-letter { text-transform: uppercase; }
 	
 		ol li a.action {
 			color: white;

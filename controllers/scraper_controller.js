@@ -17,24 +17,19 @@ Array.prototype.unique = function () {
 }
 
 Pactrac.scrape = function (request, sender, sendResponse) {
+	var patterns = {};
+	patterns.ups = /\b(1Z ?[0-9A-Z]{3} ?[0-9A-Z]{3} ?[0-9A-Z]{2} ?[0-9A-Z]{4} ?[0-9A-Z]{3} ?[0-9A-Z]|[\dT]\d\d\d ?\d\d\d\d ?\d\d\d)\b/gi;
+	patterns.fedex = /\b(\d\d\d\d ?\d\d\d\d ?\d\d\d\d)\b/ig;
+	patterns.usps = /\b(91\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d|91\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d)\b/gi;
+	
+	var matches = {};
 	var doc = document.body.innerHTML;
-	var tn = [];
-
-	var ups = doc.match(/\b(1Z ?[0-9A-Z]{3} ?[0-9A-Z]{3} ?[0-9A-Z]{2} ?[0-9A-Z]{4} ?[0-9A-Z]{3} ?[0-9A-Z]|[\dT]\d\d\d ?\d\d\d\d ?\d\d\d)\b/gi);
-	if (!!ups) { tn = tn.concat(ups); }
+	var trackingNumbers = [];
+	if (matches.ups = doc.match(patterns.ups)) { trackingNumbers = trackingNumbers.concat(matches.ups); }
+	if (matches.fedex = doc.match(patterns.fedex)) { trackingNumbers = trackingNumbers.concat(matches.fedex); }
+	if (matches.usps = doc.match(patterns.usps)) { trackingNumbers = trackingNumbers.concat(matches.usps); }
 	
-	var fedex = doc.match(/\b(\d\d\d\d ?\d\d\d\d ?\d\d\d\d)\b/ig);
-	if (!!fedex) { tn = tn.concat(fedex); }
-	
-	var usps = doc.match(/\b(91\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d|91\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d)\b/gi);
-	if (!!usps) { tn = tn.concat(usps); }
-	
-	// should remove duplicates before sending back
-	
-	sendResponse({
-		host: location.hostname,
-		numbers: tn.unique()
-	});
+	sendResponse({ host: location.hostname, numbers: trackingNumbers.unique() });
 }
 
 chrome.extension.onRequest.addListener(Pactrac.scrape);

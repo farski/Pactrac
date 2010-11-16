@@ -65,7 +65,7 @@ Pactrac.browser._list_new = function (response) {
 			h4.innerHTML = response.host;
 		
 			var h3 = document.createElement("h3");
-			h3.innerHTML = '<input type="text" id="'+response.numbers[n]+'_description" value="(Item description)" />';
+			h3.innerHTML = '<input type="text" id="'+response.numbers[n]+'_description" value="Enter item description..." />';
 		
 			var p = document.createElement("p");
 			p.innerHTML = response.numbers[n] + " ";
@@ -82,12 +82,12 @@ Pactrac.browser._list_new = function (response) {
 	return ol;
 }
 Pactrac.browser._list_saved = function () {
+	var ol = document.createElement("ol");
+	ol.className = "read";
+	ol.setAttribute('id', 'read');
+
 	if (Pactrac.browser.read().length > 0) {
 		var data = Pactrac.browser.read();
-		
-		var ol = document.createElement("ol");
-		ol.className = "read";
-		ol.setAttribute('id', 'read');
 		
 		for (d in data) {
 			var itemData = data[d];
@@ -117,12 +117,7 @@ Pactrac.browser._list_saved = function () {
 			ol.appendChild(li);
 		}
 		
-		return ol;
-	} else {
-		var ol = document.createElement("ol");
-		ol.className = "create";
-		ol.setAttribute('id', 'read');
-		
+	} else {		
 		var li = document.createElement("li");
 
 		var h3 = document.createElement("h3");
@@ -130,31 +125,37 @@ Pactrac.browser._list_saved = function () {
 		
 		li.appendChild(h3);
 		ol.appendChild(li);
-		
-		return ol;
 	}
+
+	return ol;
 }
 
 Pactrac.browser.utility.carrier_tag = function (number) {
 	var span = document.createElement("span");
 	span.className = "carrier";
+	
 	var a = document.createElement("a");
-	span.appendChild(a);
 	a.setAttribute('target', '_new');
 	
-	if (number.match(/\b(1Z ?[0-9A-Z]{3} ?[0-9A-Z]{3} ?[0-9A-Z]{2} ?[0-9A-Z]{4} ?[0-9A-Z]{3} ?[0-9A-Z]|[\dT]\d\d\d ?\d\d\d\d ?\d\d\d)\b/i)) {
-		a.className = "ups";
-		a.innerHTML = "UPS";
-		a.setAttribute('href', 'http://wwwapps.ups.com/WebTracking/track?trackNums='+number+'&track.y=10');
-	} else if (number.match(/\b(\d\d\d\d ?\d\d\d\d ?\d\d\d\d)\b/i)) {
-		a.className = "fedex";
-		a.innerHTML = "FedEx";
-		a.setAttribute('href', 'http://www.fedex.com/Tracking?action=track&tracknumbers='+number);
-	} else if (number.match(/\b(91\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d|91\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d)\b/i)) {
-		a.className = "usps";
-		a.innerHTML = "USPS";
-		a.setAttribute('href', 'http://trkcnfrm1.smi.usps.com/PTSInternetWeb/InterLabelInquiry.do?strOrigTrackNum='+number);
+	span.appendChild(a);
+	
+	var patterns = {};
+	patterns.ups = /\b(1Z ?[0-9A-Z]{3} ?[0-9A-Z]{3} ?[0-9A-Z]{2} ?[0-9A-Z]{4} ?[0-9A-Z]{3} ?[0-9A-Z]|[\dT]\d\d\d ?\d\d\d\d ?\d\d\d)\b/gi;
+	patterns.fedex = /\b(\d\d\d\d ?\d\d\d\d ?\d\d\d\d)\b/ig;
+	patterns.usps = /\b(91\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d|91\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d)\b/gi;
+
+	var linkAttributes = null;
+	if (number.match(patterns.ups)) {
+		linkAttributes = { klass: 'ups', copy: 'UPS', url: 'http://wwwapps.ups.com/WebTracking/track?track.y=10&trackNums=' };
+	} else if (number.match(patterns.fedex)) {
+		linkAttributes = { klass: 'fedex', copy: 'FedEx', url: 'http://www.fedex.com/Tracking?action=track&tracknumbers=' };
+	} else if (number.match(patterns.usps)) {
+		linkAttributes = { klass: 'usps', copy: 'USPS', url: 'http://trkcnfrm1.smi.usps.com/PTSInternetWeb/InterLabelInquiry.do?strOrigTrackNum=' };
 	}
+	
+	a.className = linkAttributes.klass;
+	a.innerHTML = linkAttributes.copy;
+	a.setAttribute('href', linkAttributes.url + number)
 	
 	return span;
 }
@@ -165,5 +166,3 @@ Pactrac.browser.utility.localNumbers = function () {
 	
 	return numbers;
 }
-
-Pactrac.browser.show();
