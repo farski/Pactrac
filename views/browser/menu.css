@@ -1,0 +1,123 @@
+* {
+	font-family: Arial, Helvetica, Verdana, sans-serif;
+}
+
+ol {
+	margin: 0 0 5px 0;
+	border: 0;
+	padding: 0;
+	list-style: none;
+	font-family: Arial, Helvetica, Verdana, sans-serif;
+	width: 500px;
+}
+ol:last-child { margin-bottom: 0; }
+
+	ol li {
+		background: #E9E9E9;
+		padding: 5px;
+		margin-bottom: 1px;
+	}
+	ol li:hover { background: #DDD; }
+	ol li:first-child { border-top-left-radius: 6px; border-top-right-radius: 6px; }
+	ol li:last-child { border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; }
+
+		ol li h3 {
+			color: #555;
+			font-size: 16px;
+			padding: 0;
+			margin: 0;
+		}
+		
+			ol li h3 input {
+				background: none;
+				padding: 0;
+				margin: 0;
+				border: 0;
+				color: #555;
+				font-weight: bold;
+				font-size: 16px;
+				outline: none;
+			}
+
+		ol li h4 {
+			float: right;
+			color: #555;
+			padding: 9px 9px 0 0;
+			margin: 0;
+			font-size: 14px;
+			text-transform: capitalize;
+		}
+	
+		ol li a.action {
+			color: white;
+			font-weight: bold;
+			font-size: 20px;
+			background: #ccc;
+			float: right;
+			height: 33px;
+			padding: 9px 6px 0;
+			margin: -5px -5px 0 0;
+			cursor: pointer;
+		}
+		ol li a.action:hover {	background: #7B0808; }
+		ol li:first-child a.action { border-top-right-radius: 6px; }
+		ol li:last-child a.action { border-bottom-right-radius: 6px; }
+
+		ol li p {
+			color: #999;
+			font-size: 12px;
+			padding: 0;
+			margin: 0;
+		}
+	
+			ol li p span {}
+			ol li p span.carrier {
+				color: #3F3F3F;
+				font-weight: bold;
+			}
+			ol li p span.carrier:before { content: "("; }
+			ol li p span.carrier:after { content: ")"; }
+	
+				ol li p span.carrier a { text-decoration: none; }
+				ol li p span.carrier a.ups { color: #512E11;  text-decoration: none;}
+				ol li p span.carrier a.fedex { color: #650198; }
+				ol li p span.carrier a.dhl { color: #CC0000; }
+				ol li p span.carrier a.usps { color: #004B8C; }
+				ol li p span.carrier a.on { color: #FFB604; }
+				ol li p span.carrier a.canada { color: #010066; }
+				ol li p span.carrier a:hover { text-decoration: underline; }
+
+ol.create {}
+
+	ol.create li {
+		background: #171717;
+	}
+	ol.create li:hover { background: #212121; }
+	
+		ol.create li h3 { color: #ABABAB; }
+
+			ol.create li h3 input { color: #ABABAB; }
+					
+		ol.create li h4 { color: #ABABAB; }
+		
+		ol.create li a.action {
+			background: #333;
+			float: left;
+			padding-top: 11px;
+			height: 31px;
+			margin-left: -5px;
+			margin-right: 6px;
+		}
+		ol.create li:first-child a.action {
+			border-top-left-radius: 6px;
+			border-top-right-radius: 0;
+		}
+		ol.create li:last-child a.action {
+			border-bottom-left-radius: 6px;
+			border-bottom-right-radius: 0;
+		}
+		ol.create li a.action:hover { background: #268003; }
+		
+		ol.create li p { color: #666; }
+		
+			ol.create li p span.carrier { color: #BFBFBF; }

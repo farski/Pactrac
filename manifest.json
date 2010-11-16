@@ -1,0 +1,20 @@
+{
+	"name": "Pactrac",
+	"description": "Quickly access tracking pages for packages you're waiting for.",
+	"version": "0.9",
+	"permissions": [
+		"tabs", "http://*/*", "https://*/*"
+	],
+	"background_page": "pactrac.html",
+	"browser_action": {
+		"default_title": "Manage and view the packages you're tracking.",
+		"default_icon": "assets/images/icons/browser.png",
+		"popup": "views/browser/menu.html"
+	},
+	"content_scripts": [
+		{
+			"matches": ["<all_urls>"],
+			"js": ["controllers/scraper_controller.js"]
+		}
+	]
+}
