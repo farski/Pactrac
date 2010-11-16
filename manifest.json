@@ -1,7 +1,7 @@
 {
 	"name": "Pactrac",
 	"description": "Quickly access tracking pages for packages you're waiting for.",
-	"version": "0.9",
+	"version": "0.9.1",
 	"icons": { "128": "assets/images/icons/closedBox/128.png" },
 	"permissions": [
 		"tabs", "http://*/*", "https://*/*"
