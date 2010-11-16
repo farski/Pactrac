@@ -30,7 +30,8 @@ Pactrac.browser.destroy = function (number) {
 Pactrac.browser.update = function (data) {
 	var trackingData = { "data": data };
 	localStorage.setItem('trackingData', JSON.stringify(trackingData));
-	chrome.browserAction.setBadgeText({ text: data.length.toString() });
+	var badgeCount = (data.length > 0 ? data.length.toString() : '');
+	chrome.browserAction.setBadgeText({ text: badgeCount });
 	if (document.getElementById('create')) { document.getElementById('pactrac').removeChild(document.getElementById('create')); }
 	if (document.getElementById('read')) { document.getElementById('pactrac').removeChild(document.getElementById('read')); }
 	Pactrac.browser.show();

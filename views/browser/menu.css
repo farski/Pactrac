@@ -79,7 +79,7 @@ ol:last-child { margin-bottom: 0; }
 			ol li p span.carrier:after { content: ")"; }
 	
 				ol li p span.carrier a { text-decoration: none; }
-				ol li p span.carrier a.ups { color: #512E11;  text-decoration: none;}
+				ol li p span.carrier a.ups { color: #512E11; }
 				ol li p span.carrier a.fedex { color: #650198; }
 				ol li p span.carrier a.dhl { color: #CC0000; }
 				ol li p span.carrier a.usps { color: #004B8C; }
@@ -121,3 +121,7 @@ ol.create {}
 		ol.create li p { color: #666; }
 		
 			ol.create li p span.carrier { color: #BFBFBF; }
+			
+				ol.create li p span.carrier a.ups { color: #874D1C; }
+				ol.create li p span.carrier a.fedex { color: #9541BF; }
+				ol.create li p span.carrier a.usps { color: #2E7CBF; }
