@@ -149,9 +149,11 @@ Pactrac.browser.utility.carrier_tag = function (number) {
 	} else if (number.match(/\b(\d\d\d\d ?\d\d\d\d ?\d\d\d\d)\b/i)) {
 		a.className = "fedex";
 		a.innerHTML = "FedEx";
+		a.setAttribute('href', 'http://www.fedex.com/Tracking?action=track&tracknumbers='+number);
 	} else if (number.match(/\b(91\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d|91\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d)\b/i)) {
 		a.className = "usps";
 		a.innerHTML = "USPS";
+		a.setAttribute('href', 'http://trkcnfrm1.smi.usps.com/PTSInternetWeb/InterLabelInquiry.do?strOrigTrackNum='+number);
 	}
 	
 	return span;
