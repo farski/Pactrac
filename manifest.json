@@ -2,13 +2,14 @@
 	"name": "Pactrac",
 	"description": "Quickly access tracking pages for packages you're waiting for.",
 	"version": "0.9",
+	"icons": { "128": "assets/images/icons/closedBox/128.png" },
 	"permissions": [
 		"tabs", "http://*/*", "https://*/*"
 	],
 	"background_page": "pactrac.html",
 	"browser_action": {
 		"default_title": "Manage and view the packages you're tracking.",
-		"default_icon": "assets/images/icons/browser.png",
+		"default_icon": "assets/images/icons/closedBox/48.png",
 		"popup": "views/browser/menu.html"
 	},
 	"content_scripts": [
