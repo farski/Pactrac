@@ -1,6 +1,6 @@
 {
 	"name": "Pactrac",
-	"description": "Simple and convenient way of keeping track of packages and deliveries. Pactrac will automatically find tracking numbers and store them so you can quickly check their status.",
+	"description": "Simple, convenient way to keep track of pending deliveries. Auto-find tracking numbers and store them to quickly check their status.",
 	"version": "0.9.2",
 	"icons": { "128": "assets/images/icons/closedBox/128.png", "48": "assets/images/icons/closedBox/48.png" },
 	"permissions": [
