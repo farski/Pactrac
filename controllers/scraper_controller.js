@@ -1,6 +1,6 @@
 var Pactrac = {};
 
-Array.prototype.unique = function () {
+Array.prototype.PTunique = function () {
 	var r = new Array();
 	o:for(var i = 0, n = this.length; i < n; i++)
 	{
@@ -29,7 +29,7 @@ Pactrac.scrape = function (request, sender, sendResponse) {
 	if (matches.fedex = doc.match(patterns.fedex)) { trackingNumbers = trackingNumbers.concat(matches.fedex); }
 	if (matches.usps = doc.match(patterns.usps)) { trackingNumbers = trackingNumbers.concat(matches.usps); }
 	
-	sendResponse({ host: location.hostname, numbers: trackingNumbers.unique() });
+	sendResponse({ host: location.hostname, numbers: trackingNumbers.PTunique() });
 }
 
 chrome.extension.onRequest.addListener(Pactrac.scrape);
