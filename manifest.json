@@ -1,7 +1,7 @@
 {
 	"name": "Pactrac",
 	"description": "Simple, convenient way to keep track of pending deliveries. Auto-find tracking numbers and store them to quickly check their status.",
-	"version": "0.9.2",
+	"version": "0.9.5",
 	"icons": { "128": "assets/images/icons/closedBox/128.png", "48": "assets/images/icons/closedBox/48.png" },
 	"permissions": [
 		"tabs", "http://*/*", "https://*/*"
