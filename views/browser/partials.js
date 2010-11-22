@@ -49,7 +49,8 @@ Pactrac.browser.view._description = function (parcel) {
 	var input = document.createElement('input');
 	input.setAttribute('type', 'text');
 	input.setAttribute('id', parcel.number + '_description');
-	input.setAttribute('value', (parcel.description == '' ? 'Enter item description...' : parcel.description ))
+	input.setAttribute('value', (parcel.description == '' ? 'Enter item description...' : parcel.description ));
+	input.setAttribute('onkeyup', 'Pactrac.browser.update(Pactrac.helpers.parcel.parseNode(this.parentNode.parentNode));');
 	
 	var description = document.createElement('h3');
 	description.appendChild(input);

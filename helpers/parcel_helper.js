@@ -9,5 +9,5 @@ Pactrac.helpers.parcel.parseNode = function (el) {
 }
 
 Pactrac.helpers.parcel.isInIndex = function (parcel) {
-	return ((Pactrac.browser.list().indexOf(parcel.number) >= 0) ? true : false );
+	return ((Pactrac.browser.index().indexOf(parcel.number) >= 0) ? true : false );
 }
