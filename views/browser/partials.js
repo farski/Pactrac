@@ -4,7 +4,13 @@ Pactrac.browser.view._list = function (parcels, id, klass) {
 	var ol = document.createElement('ol');
 	ol.className = klass;
 	ol.setAttribute('id', id);
-	
+
+	if (Pactrac.browser.index().length == 0 && klass == 'read') {
+		var alert = document.createElement('li');
+		alert.innerHTML = "<h3>You haven't saved any tracking numbers!</h3>";
+		ol.appendChild(alert);
+	}	
+
 	for (i = 0; i < parcels.length; i++) {
 		var parcel = parcels[i];
 				
