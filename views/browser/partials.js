@@ -37,10 +37,10 @@ Pactrac.browser.view._parcel = function (parcel) {
 	
 	return li
 }
-Pactrac.browser.view._action = function (text, klass, callback) {
+Pactrac.browser.view._action = function (text, klass, verb) {
 	var a = document.createElement('a');
 	a.className = 'action ' + klass;
-	a.setAttribute('onclick', callback);
+	a.setAttribute('onclick', verb);
 	a.innerHTML = text;
 	
 	return a;
