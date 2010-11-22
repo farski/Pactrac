@@ -1,3 +1,5 @@
+Pactrac.scraper = {};
+
 Array.prototype.PTunique = function () {
 	var r = new Array();
 	o:for(var i = 0, n = this.length; i < n; i++)
@@ -14,7 +16,7 @@ Array.prototype.PTunique = function () {
 	return r;
 }
 
-Pactrac.scrape = function (request, sender, sendResponse) {
+Pactrac.scraper.scrape = function (request, sender, sendResponse) {
 	var patterns = {};
 	patterns.ups = /\b(1Z ?[0-9A-Z]{3} ?[0-9A-Z]{3} ?[0-9A-Z]{2} ?[0-9A-Z]{4} ?[0-9A-Z]{3} ?[0-9A-Z]|[\dT]\d\d\d ?\d\d\d\d ?\d\d\d)\b/gi;
 	patterns.fedex = /\b(\d\d\d\d ?\d\d\d\d ?\d\d\d\d)\b/ig;
@@ -37,4 +39,4 @@ Pactrac.scrape = function (request, sender, sendResponse) {
 	sendResponse(parcels);
 }
 
-chrome.extension.onRequest.addListener(Pactrac.scrape);
+chrome.extension.onRequest.addListener(Pactrac.scraper.scrape);
