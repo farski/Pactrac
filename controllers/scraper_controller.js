@@ -1,5 +1,3 @@
-var Pactrac = {};
-
 Array.prototype.PTunique = function () {
 	var r = new Array();
 	o:for(var i = 0, n = this.length; i < n; i++)
@@ -24,12 +22,19 @@ Pactrac.scrape = function (request, sender, sendResponse) {
 	
 	var matches = {};
 	var doc = document.body.innerHTML;
-	var trackingNumbers = [];
-	if (matches.ups = doc.match(patterns.ups)) { trackingNumbers = trackingNumbers.concat(matches.ups); }
-	if (matches.fedex = doc.match(patterns.fedex)) { trackingNumbers = trackingNumbers.concat(matches.fedex); }
-	if (matches.usps = doc.match(patterns.usps)) { trackingNumbers = trackingNumbers.concat(matches.usps); }
+	var numbers = [];
+	if (matches.ups = doc.match(patterns.ups)) { numbers = numbers.concat(matches.ups); }
+	if (matches.fedex = doc.match(patterns.fedex)) { numbers = numbers.concat(matches.fedex); }
+	if (matches.usps = doc.match(patterns.usps)) { numbers = numbers.concat(matches.usps); }
+	numbers = numbers.PTunique();
+
+	var parcels = [];
+	for (i = 0; i < numbers.length; i++) {
+		var number = numbers[i];
+		parcels.push({ 'host': location.hostname, 'number': number, 'description': '' });
+	}
 	
-	sendResponse({ host: location.hostname, numbers: trackingNumbers.PTunique() });
+	sendResponse(parcels);
 }
 
 chrome.extension.onRequest.addListener(Pactrac.scrape);

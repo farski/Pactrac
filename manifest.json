@@ -10,12 +10,12 @@
 	"browser_action": {
 		"default_title": "View and manage the packages you're tracking.",
 		"default_icon": "assets/images/icons/closedBox/48.png",
-		"popup": "views/browser/menu.html"
+		"popup": "views/browser/index.html"
 	},
 	"content_scripts": [
 		{
 			"matches": ["<all_urls>"],
-			"js": ["controllers/scraper_controller.js"]
+			"js": ["config/environment.js", "controllers/scraper_controller.js"]
 		}
 	]
 }
