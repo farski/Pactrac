@@ -57,7 +57,30 @@ Pactrac.browser.view._description = function (parcel) {
 	return description;
 }
 Pactrac.browser.view._carrier = function (parcel) {
-	var span = document.createElement('span');
+	var span = document.createElement("span");
+	span.className = "carrier";
+	
+	var a = document.createElement("a");	
+	span.appendChild(a);
+	
+	var patterns = {};
+	patterns.ups = /\b(1Z ?[0-9A-Z]{3} ?[0-9A-Z]{3} ?[0-9A-Z]{2} ?[0-9A-Z]{4} ?[0-9A-Z]{3} ?[0-9A-Z]|[\dT]\d\d\d ?\d\d\d\d ?\d\d\d)\b/gi;
+	patterns.fedex = /\b(\d\d\d\d ?\d\d\d\d ?\d\d\d\d)\b/ig;
+	patterns.usps = /\b(91\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d|91\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d ?\d\d\d\d)\b/gi;
+
+	var linkAttributes = null;
+	if (parcel.number.match(patterns.ups)) {
+		linkAttributes = { klass: 'ups', copy: 'UPS', url: 'http://wwwapps.ups.com/WebTracking/track?track.y=10&trackNums=' };
+	} else if (parcel.number.match(patterns.fedex)) {
+		linkAttributes = { klass: 'fedex', copy: 'FedEx', url: 'http://www.fedex.com/Tracking?action=track&tracknumbers=' };
+	} else if (parcel.number.match(patterns.usps)) {
+		linkAttributes = { klass: 'usps', copy: 'USPS', url: 'http://trkcnfrm1.smi.usps.com/PTSInternetWeb/InterLabelInquiry.do?strOrigTrackNum=' };
+	}
+	
+	a.className = linkAttributes.klass;
+	a.innerHTML = linkAttributes.copy;
+	a.setAttribute('href', linkAttributes.url + parcel.number);
+	a.setAttribute('onclick', "chrome.tabs.create({ url: this.getAttribute('href') }); window.close();");
 	
 	return span;
 }
